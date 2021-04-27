@@ -32,6 +32,7 @@ public class Vehicle {
 	private int id;
 
 	private String name;
+	//many vehicles can be of same type
 	@ManyToOne
 	@JoinColumn(name="vehicletypeid", insertable=false, updatable=false)
 	private VehicleType vehicleType;

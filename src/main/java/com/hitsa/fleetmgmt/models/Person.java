@@ -19,6 +19,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
+// mapped super class tells that this class will be inherited by other classes and this class is not used for
+// instantiate purpose (objects should not be created from these classes to avoid redundancy because objects of 
+// sub-classes can easily use methods and properties of this class);
 public class Person {
 		
 	@Id
@@ -33,11 +36,19 @@ public class Person {
 	private String gender;
 	private String maritalStatus;
 	
+	// many person one country.
+	/**person is owner of country entity so it's columns are acquired by foreign key countryid. */
 	@ManyToOne
 	@JoinColumn(name="countryid", insertable=false, updatable=false)
 	private Country country;
 	private Integer countryid;
 	
+	/**person is owner of state entity so it's columns are acquired by foreign key stateid. */
+	/** observe that we have not used mappedBy in state class as we done in country class. Because we dont want
+	 * list of states. In country class we want list of states so country is mapped to state.
+	 * If we want to map each person with the state that it belongs then we can do by usin mappedBy("state") in
+	 * state class.
+	 */
 	@ManyToOne
 	@JoinColumn(name="stateid", insertable=false, updatable=false)
 	private State state;

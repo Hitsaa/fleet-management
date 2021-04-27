@@ -29,7 +29,7 @@ public class State {
 	private String capital;
     private String code;
 
-	// 
+	// many states and one country
 	@ManyToOne
 	// performin joing operation using countryid as foreign key for the State Entity.
 	// here State is owwner of the Country. The country column is owned by state. countryid stores the id value
