@@ -1,4 +1,4 @@
-package com.hitsa.fleetmgmt;
+package com.hitsa.fleetmgmt.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

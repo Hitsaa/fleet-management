@@ -48,7 +48,7 @@
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+      <a href="index.html" class="logo">FLEET <span class="lite">MS</span></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -266,16 +266,16 @@
           <!-- user login dropdown start-->
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="profile-ava">
-                                <img alt="" src="img/avatar1_small.jpg">
-                            </span>
-                            <span class="username">Jenifer Smith</span>
-                            <b class="caret"></b>
-                        </a>
+                 <span class="profile-ava">
+                    <img alt="" th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getUsername()} +'.jpg'}" height="38" width="38">
+                 </span>
+                 <span class="username" th:text="${#authentication.getPrincipal().getUsername()}">User</span>
+                 <b class="caret"></b>
+             </a>
             <ul class="dropdown-menu extended logout">
               <div class="log-arrow-up"></div>
               <li class="eborder-top">
-                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                <a th:href="@{/employees/profile}"><i class="icon_profile"></i> My Profile</a>
               </li>
               <li>
                 <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
@@ -310,7 +310,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a class="" href="index.html">
+            <a class="" th:href="@{/}">
                           <i class="icon_house_alt"></i>
                           <span>Dashboard</span>
                       </a>
@@ -318,65 +318,89 @@
           <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
-                          <span>Forms</span>
+                          <span>Vehicles</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="form_component.html">Form Elements</a></li>
-              <li><a class="" href="form_validation.html">Form Validation</a></li>
+              <li><a class="" th:href="@{/vehicles}">Vehicle Data</a></li>
+              <li><a class="" th:href="@{/vehicleMaintenances}">Maintenance</a></li>
+              <li><a class="" th:href="@{/vehicleMovements}">Movements</a></li>
+              <li><a class="" th:href="@{/vehicleHires}">Hires</a></li>
             </ul>
           </li>
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_desktop"></i>
-                          <span>UI Fitures</span>
+                          <i class="icon_cogs"></i>
+                          <span>Parameters</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="general.html">Components</a></li>
-              <li><a class="" href="buttons.html">Buttons</a></li>
-              <li><a class="" href="grids.html">Grids</a></li>
+              <li><a class="" th:href="@{/vehicleMakes}">Vehicle Makes</a></li>
+              <li><a class="" th:href="@{/vehicleModels}">Vehicle Models</a></li>
+              <li><a class="" th:href="@{/vehicleTypes}">Vehicle Types</a></li>
+              <li><a class="" th:href="@{/vehicleStatuses}">Status Values</a></li>
             </ul>
           </li>
-          <li>
-            <a class="" href="widgets.html">
-                          <i class="icon_genius"></i>
-                          <span>Widgets</span>
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="fa fa-users"></i>
+                          <span>People</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
+            <ul class="sub">
+              <li><a class="" th:href="@{/employees}">Employee</a></li>
+              <li><a class="" th:href="@{/clients}">Clients</a></li>
+              <li><a class="" th:href="@{/suppliers}">Suppliers</a></li>
+              <li><a class="" th:href="@{/contacts}">Contacts</a></li>
+              <li><a class="" th:href="@{/users}">Users</a></li>
+            </ul>
           </li>
-          <li>
-            <a class="" href="chart-chartjs.html">
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
                           <i class="icon_piechart"></i>
-                          <span>Charts</span>
-
-                      </a>
-
-          </li>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="icon_table"></i>
-                          <span>Tables</span>
+                          <span>HR Settings</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="basic_table.html">Basic Table</a></li>
+              <li><a class="" th:href="@{/jobTitles}">Job Titles</a></li>
+              <li><a class="" th:href="@{/employeeTypes}">Employee Type</a></li>
             </ul>
           </li>
-
-          <li class="sub-menu">
+           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_documents_alt"></i>
-                          <span>Pages</span>
+                          <i class="fa fa-usd"></i>
+                          <span>Accounts</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="profile.html">Profile</a></li>
-              <li><a class="" href="login.html"><span>Login Page</span></a></li>
-              <li><a class="" href="contact.html"><span>Contact Page</span></a></li>
-              <li><a class="" href="blank.html">Blank Page</a></li>
-              <li><a class="" href="404.html">404 Error</a></li>
+              <li><a class="" th:href="@{/invoices}">Invoices</a></li>
+              <li><a class="" th:href="@{/invoiceStatuses}">Invoice Status Values</a></li>
             </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="icon_globe"></i>
+                          <span>Globals</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              <li><a class="" th:href="@{/countries}">Countries</a></li>
+              <li><a class="" th:href="@{/states}">States</a></li>
+              <li><a class="" th:href="@{/locations}">Locations</a></li>
+            </ul>
+          </li>
+     
+         <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="icon_book"></i>
+                          <span>Reports</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>                         
+                      </a>
+            <ul class="sub">
+              <li><a class="" th:href="@{/blank}">Vehicle Reports</a></li>
+              <li><a class="" th:href="@{/blank}">Employee Reports</a></li>
+              <li><a class="" th:href="@{/blank}">Accounts Reports</a></li>
+            </ul>                      
           </li>
 
         </ul>
@@ -404,16 +428,16 @@
             <div class="profile-widget profile-widget-info">
               <div class="panel-body">
                 <div class="col-lg-2 col-sm-2">
-                  <h4>Jenifer Smith</h4>
+                  <h4><span th:text="${employee.firstname} + ' ' + ${employee.lastname}"></span></h4>
                   <div class="follow-ava">
-                    <img src="img/profile-widget-avatar.jpg" alt="">
+                    <img alt="" th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getUsername()} +'.jpg'}" height="38" width="38">
                   </div>
                   <h6>Administrator</h6>
                 </div>
                 <div class="col-lg-4 col-sm-4 follow-info">
-                  <p>Hello I’m Jenifer Smith, a leading expert in interactive and creative design.</p>
-                  <p>@jenifersmith</p>
-                  <p><i class="fa fa-twitter">jenifertweet</i></p>
+                  <p>Hello I’m KindsonTheGenius, a leading expert in interactive and creative design.</p>
+                  <p>@KindsonM</p>
+                  <p><i class="fa fa-twitter">kindsonthegenius</i></p>
                   <h6>
                                     <span><i class="icon_clock_alt"></i>11:05 AM</span>
                                     <span><i class="icon_calendar"></i>25.10.13</span>
@@ -586,34 +610,34 @@
                   <div id="profile" class="tab-pane">
                     <section class="panel">
                       <div class="bio-graph-heading">
-                        Hello I’m Jenifer Smith, a leading expert in interactive and creative design specializing in the mobile medium. My graduation from Massey University with a Bachelor of Design majoring in visual communication.
+                        Hello I’m Kindson The Genius, a leading expert in interactive and creative design specializing in the mobile medium. My graduation from Massey University with a Bachelor of Design majoring in visual communication.
                       </div>
                       <div class="panel-body bio-graph-info">
                         <h1>Bio Graph</h1>
                         <div class="row">
                           <div class="bio-row">
-                            <p><span>First Name </span>: Jenifer </p>
+                            <p><span>First Name </span>: <span th:text="${employee.firstname}"></span></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Last Name </span>: Smith</p>
+                            <p><span>Last Name </span>: <span th:text="${employee.lastname}"></span></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Birthday</span>: 27 August 1987</p>
+                            <p><span>Birthday</span>: <span th:text="${employee.dateOfBirth}"></span></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Country </span>: United</p>
+                            <p><span>Country </span>: United States</p>
                           </div>
                           <div class="bio-row">
                             <p><span>Occupation </span>: UI Designer</p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Email </span>:jenifer@mailname.com</p>
+                            <p><span>Email </span>:<span th:text="${employee.email}"></span></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Mobile </span>: (+6283) 456 789</p>
+                            <p><span>Mobile </span>: <span th:text="${employee.mobile}"></span></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Phone </span>: (+021) 956 789123</p>
+                            <p><span>Phone </span>: <span th:text="${employee.phone}"></span></p>
                           </div>
                         </div>
                       </div>
@@ -629,6 +653,12 @@
                       <div class="panel-body bio-graph-info">
                         <h1> Profile Info</h1>
                         <form class="form-horizontal" role="form">
+                         <div class="form-group">
+                            <label class="col-lg-2 control-label">Select Photo</label>
+                            <div class="col-lg-6">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fileUploadModal">Select </button>
+                            </div>
+                          </div>
                           <div class="form-group">
                             <label class="col-lg-2 control-label">First Name</label>
                             <div class="col-lg-6">
@@ -717,6 +747,38 @@
     </div>
   </section>
   <!-- container section end -->
+  
+   <div class="modal" tabindex="-1" role="dialog" id="fileUploadModal">
+  <form th:action="@{/employees/uploadPhoto2}" method="post" enctype="multipart/form-data">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Upload a Photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+		 <div class="form-group row">
+			  <label for="fupPhotoAdd" class="col-sm-4 col-form-label">Select Photo: </label>
+			  <div class="col-sm-6">
+			     <input type="file" class="form-control-file" id="fupPhotoAdd" name="file" placeholder="Select File">
+		      </div>
+		      <br>
+		      <button type="submit" id="uploadButton" class="btn btn-primary">Upload now</button>
+	     </div>  
+
+      </div>
+      <div class="modal-footer">
+        <a href="" class="btn btn-primary" id="delRef">Upload</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>  
+  
   <!-- javascripts -->
   <script src="js/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -727,6 +789,8 @@
   <script src="assets/jquery-knob/js/jquery.knob.js"></script>
   <!--custome script for all page-->
   <script src="js/scripts.js"></script>
+    <script type="text/javascript" src="static/js/profile.js" th:src="@{/js/profile.js}"></script>
+ 
 
   <script>
     //knob

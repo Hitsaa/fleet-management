@@ -9,15 +9,15 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>List of Countries</title>
+  <title>Employee Types Register</title>
 
   <!-- Bootstrap CSS -->
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <link href="../css/bootstrap-theme.css" rel="stylesheet">
-  <link href="../css/elegant-icons-style.css" rel="stylesheet" />
-  <link href="../css/font-awesome.min.css" rel="stylesheet" />
-  <link href="../css/style.css" rel="stylesheet">
-  <link href="../css/style-responsive.css" rel="stylesheet" />
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-theme.css" rel="stylesheet">
+  <link href="css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet" />
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
   <!--[if lt IE 9]>
@@ -44,7 +44,7 @@
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo">FLETT <span class="lite">MS</span></a>
+      <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -424,7 +424,7 @@
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-               Country Details
+               Employee Type Details
               </header>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add New</button>
 
@@ -436,15 +436,15 @@
                     <th><i class="icon_table"></i> Details</th>
                     <th><i class="icon_cogs"></i> Action</th>
                   </tr>
-				 <tr th:each="country:${countries}">
-					<td th:text="${country.id}">Id</td>
-					<td th:text="${country.description}">Description</td>
-					<td th:text="${country.code}">Details</td>				
+				 <tr th:each="jobTitle:${jobTitles}">
+					<td th:text="${jobTitle.id}">Id</td>
+					<td th:text="${jobTitle.description}">Description</td>
+					<td th:text="${jobTitle.details}">Details</td>				
                     <td>
                       <div class="btn-group">
-                        <a class="btn btn-primary" th:href="@{/countries/findById/(id=${country.id})}"><i class="icon_pencil-edit"></i></a>
-                        <a class="btn btn-success" id="detailsButton" th:href="@{/countries/findById/(id=${country.id})}"><i class="icon_document_alt"></i></a>
-                        <a class="btn btn-danger"  id="deleteButton" th:href="@{/countries/delete/(id=${country.id})}"><i class="icon_close_alt2"></i></a>
+                        <a class="btn btn-primary" th:href="@{/jobTitles/findById/(id=${jobTitle.id})}"><i class="icon_pencil-edit"></i></a>
+                        <a class="btn btn-success" id="detailsButton" th:href="@{/jobTitles/findById/(id=${jobTitle.id})}"><i class="icon_document_alt"></i></a>
+                        <a class="btn btn-danger"  id="deleteButton" th:href="@{/jobTitles/delete/(id=${jobTitle.id})}"><i class="icon_close_alt2"></i></a>
                       </div>
                     </td>
                   </tr>
@@ -472,30 +472,31 @@
   <!-- container section end -->
   
   <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- <form th:action="@{/countries/addNew}" method="post">
+ <form th:action="@{/jobTitles/addNew}" method="post">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Country Record</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Vehicle Record</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
       <div class="modal-body">
+
           <div class="form-group">
             <label for="idAdd" class="col-form-label">Id:</label>
             <input type="text" class="form-control" id="idAdd" name="id" disabled>
           </div>
 
           <div class="form-group">
-            <label for="descriptionAdd" class="col-form-label">Description:</label>
+            <label for="descriptionEdit" class="col-form-label">Description:</label>
             <input type="text" class="form-control" id="descriptionAdd" name="description" required>
           </div>
           
           <div class="form-group">
-            <label for="txtCodeAdd" class="col-form-label">Code:</label>
-            <input type="text" class="form-control" id="txtCodeAdd" name="code">
+            <label for="detailsEdit" class="col-form-label">Details:</label>
+            <input type="text" class="form-control" id="detailsAdd" name="details">
           </div>        
       </div>
 
@@ -508,11 +509,11 @@
  </form>
   </div> 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
- <form th:action="@{/countries/update}" method="put"> 
+ <form th:action="@{/jobTitles/update}" method="put"> 
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Edit Country Data</h5>
+        <h5 class="modal-title" id="editModalLabel">Edit Vehicle Type</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -530,10 +531,9 @@
           </div>
           
           <div class="form-group">
-            <label for="codeEdit" class="col-form-label">Code:</label>
-            <input type="text" class="form-control" id="codeEdit" name="code">
-          </div>  
-      
+            <label for="detailsEdit" class="col-form-label">Details:</label>
+            <input type="text" class="form-control" id="detailsEdit" name="details">
+          </div>        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -549,7 +549,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Country Details</h5>
+        <h5 class="modal-title" id="editModalLabel">Employee Type Details</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -567,8 +567,8 @@
           </div>
           
           <div class="form-group">
-            <label class="col-form-label">Code:</label>
-            <input type="text" class="form-control" id="codeDetails" name="code" readonly>
+            <label class="col-form-label">Details:</label>
+            <input type="text" class="form-control" id="detailsDetails" name="details" readonly>
           </div>
           
           <div class="form-group">
@@ -610,14 +610,14 @@
 </div>
    
   <!-- javascripts -->
-  <script src="../js/jquery.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <!-- nicescroll -->
-  <script src="../js/jquery.scrollTo.min.js"></script>
-  <script src="../js/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="js/jquery.scrollTo.min.js"></script>
+  <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
   <!--custome script for all page-->
-  <script src="../js/scripts.js"></script>
-  <script type="text/javascript" src="../static/js/country.js" th:src="@{/js/country.js}"></script>
+  <script src="js/scripts.js"></script>
+  <script type="text/javascript" src="static/js/jobTitle.js" th:src="@{/js/jobTitle.js}"></script>
 
 
 </body>

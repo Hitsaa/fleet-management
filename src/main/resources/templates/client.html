@@ -9,7 +9,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Contact Register</title>
+  <title>Client Register</title>
 
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -432,19 +432,23 @@
                 <tbody>
                   <tr>
                     <th><i class="icon_profile"></i> Name</th>
+                    <th><i class="icon_calendar"></i>Website</th>
                     <th><i class="icon_mail_alt"></i> Email</th>
+                    <th><i class="icon_pin_alt"></i> City</th>
                     <th><i class="icon_mobile"></i> Phone</th>
                     <th><i class="icon_cogs"></i> Action</th>
                   </tr>
-				 <tr th:each="contact:${contacts}">
-					<td th:text="${contact.firstname} + ' ' + ${contact.lastname}">Name</td>
-					<td th:text="${contact.email}">Email</td>
-					<td th:text="${contact.phone}">Phone</td>					
+				 <tr th:each="client:${clients}">
+					<td th:text="${client.name}">Name</td>
+					<td th:text="${client.website}">Website</td>
+					<td th:text="${client.email}">Email</td>
+					<td th:text="${client.city}">City</td>
+					<td th:text="${client.phone}">Phone</td>					
                     <td>
                       <div class="btn-group">
-                        <a class="btn btn-primary" id="editButton" th:href="@{/contacts/findById/(id=${contact.id})}"><i class="icon_pencil-edit"></i></a>
-                        <a class="btn btn-success" id="detailsButton" th:href="@{/contacts/findById/(id=${contact.id})}"><i class="icon_document_alt"></i></a>
-                        <a class="btn btn-danger" id="deleteButton" th:href="@{/contacts/delete/(id=${contact.id})}"><i class="icon_close_alt2"></i></a>
+                        <a class="btn btn-primary" id="editButton" th:href="@{/clients/findById/(id=${client.id})}"><i class="icon_pencil-edit"></i></a>
+                        <a class="btn btn-success" id="detailsButton" th:href="@{/clients/findById/(id=${client.id})}"><i class="icon_document_alt"></i></a>
+                        <a class="btn btn-danger" id="deleteButton" th:href="@{/clients/delete/(id=${client.id})}"><i class="icon_close_alt2"></i></a>
                       </div>
                     </td>
                   </tr>
@@ -472,50 +476,106 @@
   <!-- container section end -->
   
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- <form th:action="@{/contacts/addNew}" method="post">
-  <div class="modal-dialog modal-lg" role="document">
+ <form th:action="@{/clients/addNew}" method="post">
+  <div class="modal-dialog modal-lg" role="document" style="width:70%">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Contact Record</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Client Record</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
       <div class="modal-body">
-          <div class="form-group">
-            <label for="txtIdAdd" class="col-form-label">Id:</label>
-            <input type="text" class="form-control" id="txtIdAdd" name="id" disabled>
-          </div>
+		<table width="100%">
+			<tr>
+				<td width="50%">
+				
+				 <div class="form-group row">
+				    <label for="txtIdAdd" class="col-sm-4 col-form-label">Id: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtIdAdd" name="id" placeholder="Id" disabled>
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtNameAdd" class="col-sm-4 col-form-label">Name: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtNameAdd" name="name" placeholder="Name">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtDetailsAdd" class="col-sm-4 col-form-label">Details.: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtDetailsAdd" name="details" placeholder="Details">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtWebsiteAdd" class="col-sm-4 col-form-label">website: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtWebsiteAdd" name="website" placeholder="Website">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtAddressAdd" class="col-sm-4 col-form-label">Address</label>
+				    <div class="col-sm-6">
+				      <textarea class="form-control" id="txtAddressAdd" name="address" placeholder="Address" rows="2"></textarea>
+				    </div>
+				  </div>
+				</td>
+				<td width="50%" style="padding-left:10px">
+				  <div class="form-group row">
+				    <label for="ddlStateAdd" class="col-sm-4 col-form-label">State/Province: </label>
+				    <div class="col-sm-6">
+					    <select class="form-control" id="ddlStateAdd" name="stateid">
+		        	       <option>-SELECT-</option>			    					  					    					    
+					       <option th:each="state : ${states}"
+						        th:value="${state.id}"
+						        th:text="${state.name}">
+						   </option>
+					    </select>				    
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="ddlCountryAdd" class="col-sm-4 col-form-label">Country: </label>
+				    <div class="col-sm-6">
+					    <select class="form-control" id="ddlCountryAdd" name="countryid">
+		        	       <option>-SELECT-</option>			    					  					    					    
+					       <option th:each="country : ${countries}"
+						        th:value="${country.id}"
+						        th:text="${country.description}">
+						   </option>
+					    </select>				    
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtCityAdd" class="col-sm-4 col-form-label">City: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtCityAdd" name="city" placeholder="City">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtPhoneAdd" class="col-sm-4 col-form-label">Phone: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtPhoneAdd" name="phone" placeholder="Phone">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtMobileAdd" class="col-sm-4 col-form-label">Mobile: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtMobileAdd" name="mobile" placeholder="Mobile">
+				    </div>
+				  </div>
 
-          <div class="form-group">
-            <label for="txtFirstnameAdd" class="col-form-label">Firstname:</label>
-            <input type="text" class="form-control" id="txtFirstnameAdd" name="firstname" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="txtLastNameAdd" class="col-form-label">Lastname:</label>
-            <input type="text" class="form-control" id="txtLastNameAdd" name="lastname">
-          </div>  
-
-          <div class="form-group">
-            <label for="txtEmailAdd" class="col-form-label">Email:</label>
-            <input type="text" class="form-control" id="txtEmailAdd" name="email" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="txtMobileAdd" class="col-form-label">Mobile:</label>
-            <input type="text" class="form-control" id="txtMobileAdd" name="mobile">
-          </div>   
-          <div class="form-group">
-            <label for="txtPhoneAdd" class="col-form-label">Phone:</label>
-            <input type="text" class="form-control" id="txtPhoneAdd" name="phone" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="txtRemarksAdd" class="col-form-label">Remarks:</label>
-            <input type="text" class="form-control" id="txtRemarksAdd" name="remarks">
-          </div>      
+				  <div class="form-group row">
+				    <label for="txtEmailAdd" class="col-sm-4 col-form-label">Email</label>
+				    <div class="col-sm-6">
+				      <input type="email" class="form-control" id="txtEmailAdd" name="email" placeholder="Email">
+				    </div>
+				  </div>
+				</td>
+			</tr>
+		</table>
+		  <button type="submit" class="btn btn-primary">Sign in</button>
       </div>
 
       <div class="modal-footer">
@@ -528,52 +588,108 @@
 </div>
   
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- <form th:action="@{/contacts/update}" method="put">
-  <div class="modal-dialog modal-lg" role="document">
+ <form th:action="@{/clients/update}" method="put">
+  <div class="modal-dialog modal-lg" role="document" style="width:70%">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Contact Record</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Client Record</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
       <div class="modal-body">
-          <div class="form-group">
-            <label for="txtIdEdit" class="col-form-label">Id:</label>
-            <input type="text" class="form-control" id="txtIdEdit" name="id" readonly>
-          </div>
+		<form>
+		<table width="100%">
+			<tr>
+				<td width="50%">
+				
+				 <div class="form-group row">
+				    <label for="txtIdEdit" class="col-sm-4 col-form-label">Id: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtIdEdit" name="id" placeholder="Id" readonly>
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtNameEdit" class="col-sm-4 col-form-label">Name: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtNameEdit" name="name" placeholder="Name">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtDetailsEdit" class="col-sm-4 col-form-label">Details.: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtDetailsEdit" name="details" placeholder="Details">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtWebsiteEdit" class="col-sm-4 col-form-label">website: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtWebsiteEdit" name="website" placeholder="Website">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtAddressEdit" class="col-sm-4 col-form-label">Address</label>
+				    <div class="col-sm-6">
+				      <textarea class="form-control" id="txtAddressEdit" name="address" placeholder="Address" rows="2"></textarea>
+				    </div>
+				  </div>
+				</td>
+				<td width="50%" style="padding-left:10px">
+				  <div class="form-group row">
+				    <label for="ddlStateEdit" class="col-sm-4 col-form-label">State/Province: </label>
+				    <div class="col-sm-6">
+					    <select class="form-control" id="ddlStateEdit" name="stateid">
+		        	       <option>-SELECT-</option>			    					  					    					    
+					       <option th:each="state : ${states}"
+						        th:value="${state.id}"
+						        th:text="${state.name}">
+						   </option>
+					    </select>				    
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="ddlCountryEdit" class="col-sm-4 col-form-label">Country: </label>
+				    <div class="col-sm-6">
+					    <select class="form-control" id="ddlCountryEdit" name="countryid">
+		        	       <option>-SELECT-</option>			    					  					    					    
+					       <option th:each="country : ${countries}"
+						        th:value="${country.id}"
+						        th:text="${country.description}">
+						   </option>
+					    </select>				    
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtCityEdit" class="col-sm-4 col-form-label">City: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtCityEdit" name="city" placeholder="City">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtPhoneEdit" class="col-sm-4 col-form-label">Phone: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtPhoneEdit" name="phone" placeholder="Phone">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="txtMobileEdit" class="col-sm-4 col-form-label">Mobile: </label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="txtMobileEdit" name="mobile" placeholder="Mobile">
+				    </div>
+				  </div>
 
-          <div class="form-group">
-            <label for="txtFirstnameEdit" class="col-form-label">Firstname:</label>
-            <input type="text" class="form-control" id="txtFirstnameEdit" name="firstname" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="txtLastnameEdit" class="col-form-label">Lastname:</label>
-            <input type="text" class="form-control" id="txtLastnameEdit" name="lastname">
-          </div>  
-
-          <div class="form-group">
-            <label for="txtEmailEdit" class="col-form-label">Email:</label>
-            <input type="text" class="form-control" id="txtEmailEdit" name="email" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="txtMobileEdit" class="col-form-label">Mobile:</label>
-            <input type="text" class="form-control" id="txtMobileEdit" name="mobile">
-          </div>   
-          <div class="form-group">
-            <label for="txtPhoneEdit" class="col-form-label">Phone:</label>
-            <input type="text" class="form-control" id="txtPhoneEdit" name="phone" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="txtRemarksEdit" class="col-form-label">Remarks:</label>
-            <input type="text" class="form-control" id="txtRemarksEdit" name="remarks">
-          </div>      
+				  <div class="form-group row">
+				    <label for="txtEmailEdit" class="col-sm-4 col-form-label">Email</label>
+				    <div class="col-sm-6">
+				      <input type="email" class="form-control" id="txtEmailEdit" name="email" placeholder="Email">
+				    </div>
+				  </div>
+				</td>
+			</tr>
+		</table>
+		  <button type="submit" class="btn btn-primary">Sign in</button>
+		</form>
       </div>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save</button>
@@ -612,7 +728,7 @@
   <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
   <!--custome script for all page-->
   <script src="js/scripts.js"></script>
-  <script type="text/javascript" src="static/js/contact.js" th:src="@{/js/contact.js}"></script>
+  <script type="text/javascript" src="static/js/client.js" th:src="@{/js/client.js}"></script>
 
 
 </body>

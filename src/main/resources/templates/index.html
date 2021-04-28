@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="description" content="Fleet App">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Creative - Bootstrap Admin Template</title>
+  <title>Fleet Management System</title>
 
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -46,14 +46,13 @@
   <!-- container section start -->
   <section id="container" class="">
 
-
     <header class="header dark-bg">
       <div class="toggle-nav">
         <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+      <a href="/index" class="logo">FLEET <span class="lite">MS</span></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -270,17 +269,17 @@
           <!-- alert notification end-->
           <!-- user login dropdown start-->
           <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="profile-ava">
-                                <img alt="" src="img/avatar1_small.jpg">
-                            </span>
-                            <span class="username">Jenifer Smith</span>
-                            <b class="caret"></b>
-                        </a>
+            <a data-toggle="dropdown" class="dropdown-toggle" th:href="@{'/img/photos/' + ${#authentication.getPrincipal().getUsername()} +'.jpg'}">
+                <span class="profile-ava">
+                    <img alt="" th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getUsername()} +'.jpg'}" height="38" width="38">
+                </span>
+                <span class="username" th:text="${#authentication.getPrincipal().getUsername()}">User</span>
+                <b class="caret"></b>
+            </a>
             <ul class="dropdown-menu extended logout">
               <div class="log-arrow-up"></div>
               <li class="eborder-top">
-                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                <a th:href="@{/profile}"><i class="icon_profile"></i> My Profile</a>
               </li>
               <li>
                 <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
@@ -292,13 +291,13 @@
                 <a href="#"><i class="icon_chat_alt"></i> Chats</a>
               </li>
               <li>
-                <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
+                <a th:href="@{/logout}"><i class="icon_key_alt"></i> Log Out</a>
               </li>
               <li>
-                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                <a href="#"><i class="icon_key_alt"></i> Documentation</a>
               </li>
               <li>
-                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                <a href="#"><i class="icon_key_alt"></i> Documentation</a>
               </li>
             </ul>
           </li>
@@ -315,7 +314,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a class="" href="index.html">
+            <a class="" th:href="@{/}">
                           <i class="icon_house_alt"></i>
                           <span>Dashboard</span>
                       </a>
@@ -323,65 +322,89 @@
           <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
-                          <span>Forms</span>
+                          <span>Vehicles</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="form_component.html">Form Elements</a></li>
-              <li><a class="" href="form_validation.html">Form Validation</a></li>
+              <li><a class="" th:href="@{/vehicles}">Vehicle Data</a></li>
+              <li><a class="" th:href="@{/vehicleMaintenances}">Maintenance</a></li>
+              <li><a class="" th:href="@{/vehicleMovements}">Movements</a></li>
+              <li><a class="" th:href="@{/vehicleHires}">Hires</a></li>
             </ul>
           </li>
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_desktop"></i>
-                          <span>UI Fitures</span>
+                          <i class="icon_cogs"></i>
+                          <span>Parameters</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="general.html">Elements</a></li>
-              <li><a class="" href="buttons.html">Buttons</a></li>
-              <li><a class="" href="grids.html">Grids</a></li>
+              <li><a class="" th:href="@{/vehicleMakes}">Vehicle Makes</a></li>
+              <li><a class="" th:href="@{/vehicleModels}">Vehicle Models</a></li>
+              <li><a class="" th:href="@{/vehicleTypes}">Vehicle Types</a></li>
+              <li><a class="" th:href="@{/vehicleStatuses}">Status Values</a></li>
             </ul>
           </li>
-          <li>
-            <a class="" href="widgets.html">
-                          <i class="icon_genius"></i>
-                          <span>Widgets</span>
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="fa fa-users"></i>
+                          <span>People</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
+            <ul class="sub">
+              <li><a class="" th:href="@{/employees}">Employee</a></li>
+              <li><a class="" th:href="@{/clients}">Clients</a></li>
+              <li><a class="" th:href="@{/suppliers}">Suppliers</a></li>
+              <li><a class="" th:href="@{/contacts}">Contacts</a></li>
+              <li><a class="" th:href="@{/users}">Users</a></li>
+            </ul>
           </li>
-          <li>
-            <a class="" href="chart-chartjs.html">
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
                           <i class="icon_piechart"></i>
-                          <span>Charts</span>
-
-                      </a>
-
-          </li>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="icon_table"></i>
-                          <span>Tables</span>
+                          <span>HR Settings</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="basic_table.html">Basic Table</a></li>
+              <li><a class="" th:href="@{/jobTitles}">Job Titles</a></li>
+              <li><a class="" th:href="@{/employeeTypes}">Employee Type</a></li>
             </ul>
           </li>
-
-          <li class="sub-menu">
+           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_documents_alt"></i>
-                          <span>Pages</span>
+                          <i class="fa fa-usd"></i>
+                          <span>Accounts</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="profile.html">Profile</a></li>
-              <li><a class="" href="login.html"><span>Login Page</span></a></li>
-              <li><a class="" href="contact.html"><span>Contact Page</span></a></li>
-              <li><a class="" href="blank.html">Blank Page</a></li>
-              <li><a class="" href="404.html">404 Error</a></li>
+              <li><a class="" th:href="@{/invoices}">Invoices</a></li>
+              <li><a class="" th:href="@{/invoiceStatuses}">Invoice Status Values</a></li>
             </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="icon_globe"></i>
+                          <span>Globals</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              <li><a class="" th:href="@{/countries}">Countries</a></li>
+              <li><a class="" th:href="@{/states}">States</a></li>
+              <li><a class="" th:href="@{/locations}">Locations</a></li>
+            </ul>
+          </li>
+     
+         <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="icon_book"></i>
+                          <span>Reports</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>                         
+                      </a>
+            <ul class="sub">
+              <li><a class="" th:href="@{/blank}">Vehicle Reports</a></li>
+              <li><a class="" th:href="@{/blank}">Employee Reports</a></li>
+              <li><a class="" th:href="@{/blank}">Accounts Reports</a></li>
+            </ul>                      
           </li>
 
         </ul>
@@ -407,9 +430,9 @@
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box blue-bg">
-              <i class="fa fa-cloud-download"></i>
-              <div class="count">6.674</div>
-              <div class="title">Download</div>
+              <i class="fa fa-truck"></i>
+              <div class="count">120</div>
+              <div class="title">Trucks</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -417,19 +440,20 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box brown-bg">
-              <i class="fa fa-shopping-cart"></i>
-              <div class="count">7.538</div>
-              <div class="title">Purchased</div>
+              <i class="fa fa-car"></i>
+              <div class="count">450</div>
+              <div class="title">Cars</div>
             </div>
+            </a>
             <!--/.info-box-->
           </div>
           <!--/.col-->
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box dark-bg">
-              <i class="fa fa-thumbs-o-up"></i>
-              <div class="count">4.362</div>
-              <div class="title">Order</div>
+              <i class="fa fa-user"></i>
+              <div class="count">1000</div>
+              <div class="title">Employees</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -437,9 +461,9 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box green-bg">
-              <i class="fa fa-cubes"></i>
-              <div class="count">1.426</div>
-              <div class="title">Stock</div>
+              <i class="fa fa-location-arrow"></i>
+              <div class="count">46</div>
+              <div class="title">Locations</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -454,16 +478,11 @@
 
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h2><i class="fa fa-map-marker red"></i><strong>Countries</strong></h2>
-                <div class="panel-actions">
-                  <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-                  <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
-                </div>
+   
               </div>
-              <div class="panel-body-map">
-                <div id="map" style="height:380px;"></div>
-              </div>
+<div >
+    <div style="background-image: url('img/bg-1.jpg'); background-size:100% 100%; height:400px;"></div>
+</div>
 
             </div>
           </div>
@@ -496,13 +515,9 @@
             </ul>
           </div>
 
-
         </div>
 
-
         <!-- Today status end -->
-
-
 
         <div class="row">
 
@@ -1052,7 +1067,7 @@
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
           -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          Designed by <a href="https://www.kindsonthegenius.com/">KindsonTheGenius</a>
         </div>
       </div>
     </section>
