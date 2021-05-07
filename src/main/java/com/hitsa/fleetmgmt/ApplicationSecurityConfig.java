@@ -28,6 +28,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
         .authorizeRequests()
         .antMatchers("/login", "/resources/**","/css/**","/fonts/**","/img/**")
         .permitAll()
+        .antMatchers("/register", "/resources/**","/css/**","/fonts/**","/img/**","/js/**")
+        .permitAll()
+        .antMatchers("/users/addNew")
+        .permitAll()
         .anyRequest()
         .authenticated()
         .and()
@@ -49,10 +53,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+    @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder());
+        provider.setPasswordEncoder(bCryptPasswordEncoder());
         
         return provider;
     }

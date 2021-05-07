@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hitsa.fleetmgmt.models.User;
@@ -14,6 +15,8 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	//Get All Users
 	public List<User> findAll(){
@@ -32,6 +35,7 @@ public class UserService {
 	
 	//Update User
 	public void save(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 	}
 
