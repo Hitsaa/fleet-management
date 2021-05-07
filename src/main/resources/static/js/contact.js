@@ -4,16 +4,17 @@
 
 $('document').ready(function() {
 	
-	$('.table #editButton').on('click',function(event){		
+	$('.table .btn-primary').on('click',function(event){		
 		event.preventDefault();		
 		var href= $(this).attr('href');		
-		$.get(href, function(country, status){
-			$('#idEdit').val(country.id);
-			$('#descriptionEdit').val(country.description);
-			$('#codeEdit').val(country.code);
-			$('#capitalEdit').val(country.capital);
-			$('#nationalityEdit').val(country.nationality);
-			$('#continentEdit').val(country.continent);
+		$.get(href, function(contact, status){
+			$('#txtEmailEdit').val(contact.email);
+			$('#txtFirstnameEdit').val(contact.firstname);
+			$('#txtIdEdit').val(contact.id);
+			$('#txtLastnameEdit').val(contact.lastname);	
+			$('#txtMobileEdit').val(contact.mobile);
+			$('#txtPhoneEdit').val(contact.phone);			
+			$('#txtRemarksEdit').val(contact.remarks);
 		});			
 		$('#editModal').modal();		
 	});

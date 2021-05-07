@@ -15,7 +15,7 @@ $('document').ready(function() {
 			$('#nationalityEdit').val(country.nationality);
 			$('#continentEdit').val(country.continent);
 		});			
-		$('#editModal').modal();		
+		$('#editModal').modal();
 	});
 	
 	$('.table #detailsButton').on('click',function(event) {
